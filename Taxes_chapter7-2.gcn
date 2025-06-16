@@ -96,16 +96,17 @@ block EQUILIBRIUM
 
 block EXOG
 {
-    identities
-    {
-        A[] = exp(rho * log(A[-1]) + epsilon_A[]);
+    identities {
+        A[] = exp(rho * log(A[-1])) + epsilon_A[];
+        D[] = exp((1-rho_D)*log(D_ss)) + rho_D*log(D[-1])) + epsilon_D[];
     };
-    shocks
-    {
-        epsilon_A[];
+    shocks {
+        epsilon_A;
+        epsilon_D;
     };
-    calibration
-    {
+    calibration {
         rho = 0.95;
+        rho_D = 1.0;    # Parámetro de persistencia (total, como pide la pregunta 6)
+        D_ss = 1.0;     # Valor en estado estacionario
     };
 };
